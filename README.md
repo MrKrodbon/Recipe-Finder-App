@@ -13,7 +13,6 @@
 - 📃 View detailed recipe information
 - 💾 Caches search results locally (localStorage)
 - 📱 Responsive layout for mobile and desktop
-- 😢 Displays a "Not Found" page if no recipes match the criteria
 
 ---
 
