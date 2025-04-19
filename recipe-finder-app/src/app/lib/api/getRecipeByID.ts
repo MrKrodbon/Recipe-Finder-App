@@ -1,6 +1,6 @@
-import axios from "axios";
+import axios from 'axios';
 
-axios.defaults.baseURL = " https://api.spoonacular.com/recipes/";
+axios.defaults.baseURL = ' https://api.spoonacular.com/recipes/';
 
 export const getRecipeByID = async (id: number) => {
   const key = `recipeByID: ${JSON.stringify(id)}`;

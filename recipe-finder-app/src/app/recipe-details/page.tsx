@@ -1,34 +1,33 @@
-"use client";
-import Image from "next/image";
-import { useRouter, useSearchParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
-import { getRecipeByID } from "../lib/api/getRecipeByID";
-import { Ingredients, RecipeInfo } from "../types/recipes";
-import Loading from "@/components/loading";
+'use client';
+import Image from 'next/image';
+import { useRouter, useSearchParams } from 'next/navigation';
+import React, { useEffect, useState } from 'react';
+import { getRecipeByID } from '../lib/api/getRecipeByID';
+import { Ingredients, RecipeInfo } from '../types/recipes';
+import Loading from '@/components/loading';
 
 const Page = () => {
   const params = useSearchParams();
   const route = useRouter();
   const [recipe, setRecipe] = useState<RecipeInfo>();
-  const searchRecipeID = params.get("id");
-
-  const fetchRecipeDetails = async () => {
-    if (searchRecipeID) {
-      try {
-        const response = await getRecipeByID(+searchRecipeID);
-
-        setRecipe(response.data);
-      } catch (error) {
-        console.error("Failed to fetch recipe details:", error);
-      }
-    }
-  };
+  const searchRecipeID = params.get('id');
 
   useEffect(() => {
+    const fetchRecipeDetails = async () => {
+      if (searchRecipeID) {
+        try {
+          const response = await getRecipeByID(+searchRecipeID);
+
+          setRecipe(response.data);
+        } catch (error) {
+          console.error('Failed to fetch recipe details:', error);
+        }
+      }
+    };
     if (searchRecipeID) {
       fetchRecipeDetails();
     }
-  }, []);
+  }, [searchRecipeID]);
 
   if (!recipe) {
     return (
@@ -44,15 +43,8 @@ const Page = () => {
     route.back();
   };
 
-  const {
-    title,
-    image,
-    sourceName,
-    servings,
-    cookingMinutes,
-    extendedIngredients,
-    instructions,
-  } = recipe;
+  const { title, image, sourceName, servings, cookingMinutes, extendedIngredients, instructions } =
+    recipe;
 
   return (
     <div className="max-w-5xl mx-auto p-6 bg-white shadow-lg rounded-lg my-10">
@@ -81,8 +73,7 @@ const Page = () => {
             <span className="font-semibold">Source:</span> {sourceName}
           </p>
           <p>
-            <span className="font-semibold">Preparation time:</span>{" "}
-            {cookingMinutes} min
+            <span className="font-semibold">Preparation time:</span> {cookingMinutes} min
           </p>
           <p>
             <span className="font-semibold">Servings:</span> {servings}
@@ -102,7 +93,7 @@ const Page = () => {
       <div className="mt-8">
         <h2 className="text-2xl font-semibold mb-4">Instructions</h2>
         <p className="whitespace-pre-wrap text-gray-700 leading-relaxed">
-          {instructions || "No instructions available."}
+          {instructions || 'No instructions available.'}
         </p>
       </div>
     </div>

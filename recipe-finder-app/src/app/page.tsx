@@ -1,11 +1,13 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
-import { CUISINE_TYPES } from "./constants/cuisineTypes";
-import { Field, Form, Formik } from "formik";
-import { ListBox } from "primereact/listbox";
-import clsx from "clsx";
-import { useRouter } from "next/navigation";
+import React, { useState } from 'react';
+import { CUISINE_TYPES } from './constants/cuisineTypes';
+import { Field, Form, Formik } from 'formik';
+
+import { ListBox } from 'primereact/listbox';
+
+import clsx from 'clsx';
+import { useRouter } from 'next/navigation';
 
 interface SubmitForm {
   query: string;
@@ -20,11 +22,10 @@ export default function Home() {
   const onSubmitHandle = (values: SubmitForm) => {
     const searchParams = new URLSearchParams();
 
-    if (values.query.trim()) searchParams.set("query", values.query.trim());
-    if (values.cuisine.trim())
-      searchParams.set("cuisine", values.cuisine.trim());
+    if (values.query.trim()) searchParams.set('query', values.query.trim());
+    if (values.cuisine.trim()) searchParams.set('cuisine', values.cuisine.trim());
     if (values.preparationTime.trim())
-      searchParams.set("preparationTime", values.preparationTime.trim());
+      searchParams.set('preparationTime', values.preparationTime.trim());
 
     router.push(`/recipes?${searchParams.toString()}`);
   };
@@ -32,31 +33,25 @@ export default function Home() {
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100 px-4">
       <main className="w-full max-w-xl bg-white rounded-2xl shadow-lg p-8 sm:p-10">
-        <h1 className="text-3xl font-bold text-center text-gray-800 mb-8">
-          Search recipes
-        </h1>
+        <h1 className="text-3xl font-bold text-center text-gray-800 mb-8">Search recipes</h1>
 
         <Formik
           initialValues={{
-            query: "",
-            cuisine: "",
-            preparationTime: "",
+            query: '',
+            cuisine: '',
+            preparationTime: '',
           }}
           onSubmit={(values: SubmitForm) => {
             onSubmitHandle(values);
           }}
         >
           {({ values, setFieldValue }) => {
-            const isNextButtonDisabled =
-              !values.cuisine.trim() && !values.preparationTime.trim();
+            const isNextButtonDisabled = !values.cuisine.trim() && !values.preparationTime.trim();
 
             return (
               <Form className="flex flex-col gap-6">
                 <div className="flex flex-col">
-                  <label
-                    htmlFor="query"
-                    className="mb-1 text-gray-700 font-medium"
-                  >
+                  <label htmlFor="query" className="mb-1 text-gray-700 font-medium">
                     Query
                   </label>
                   <Field
@@ -68,10 +63,7 @@ export default function Home() {
                 </div>
 
                 <div className="flex flex-col relative">
-                  <label
-                    htmlFor="cuisine"
-                    className="mb-1 text-gray-700 font-medium"
-                  >
+                  <label htmlFor="cuisine" className="mb-1 text-gray-700 font-medium">
                     Cuisine
                   </label>
                   <Field
@@ -86,21 +78,18 @@ export default function Home() {
                     <ListBox
                       value={values.cuisine}
                       onChange={(e) => {
-                        setFieldValue("cuisine", e.value);
+                        setFieldValue('cuisine', e.value);
                         setShowListBox(false);
                       }}
                       options={CUISINE_TYPES}
                       className="w-full md:w-14rem absolute top-full z-10 mt-2 bg-gray-200 p-2.5 rounded-2xl"
-                      listStyle={{ maxHeight: "100px" }}
+                      listStyle={{ maxHeight: '100px' }}
                     />
                   )}
                 </div>
 
                 <div className="flex flex-col">
-                  <label
-                    htmlFor="preparationTime"
-                    className="mb-1 text-gray-700 font-medium"
-                  >
+                  <label htmlFor="preparationTime" className="mb-1 text-gray-700 font-medium">
                     Max preparation time (min)
                   </label>
                   <Field
@@ -114,11 +103,11 @@ export default function Home() {
                 <button
                   type="submit"
                   className={clsx(
-                    "w-full mt-4 py-2 px-4 text-white text-lg font-semibold rounded-xl transition duration-200",
+                    'w-full mt-4 py-2 px-4 text-white text-lg font-semibold rounded-xl transition duration-200',
                     {
-                      "bg-blue-500 hover:bg-blue-600": !isNextButtonDisabled,
-                      "bg-gray-400 cursor-not-allowed": isNextButtonDisabled,
-                    }
+                      'bg-blue-500 hover:bg-blue-600': !isNextButtonDisabled,
+                      'bg-gray-400 cursor-not-allowed': isNextButtonDisabled,
+                    },
                   )}
                   disabled={isNextButtonDisabled}
                 >

@@ -1,18 +1,18 @@
-"use client";
-import { RecipeItem, RecipeSearchParams } from "@/app/types/recipes";
-import React, { useEffect, useState } from "react";
-import RecipeListItem from "./recipe-list-item";
-import { useSearchParams } from "next/navigation";
-import { getRecipes } from "@/app/lib/api/getRecipes";
+'use client';
+import { RecipeItem, RecipeSearchParams } from '@/app/types/recipes';
+import React, { useEffect, useState } from 'react';
+import RecipeListItem from './recipe-list-item';
+import { useSearchParams } from 'next/navigation';
+import { getRecipes } from '@/app/lib/api/getRecipes';
 const RecipeList = () => {
   const [searchResult, setSearchResult] = useState<RecipeItem[]>([]);
 
   const params = useSearchParams();
   const search = params.toString();
 
-  const query = params.get("query") || "";
-  const cuisine = params.get("cuisine") || "";
-  const preparationTime = params.get("preparationTime") || "";
+  const query = params.get('query') || '';
+  const cuisine = params.get('cuisine') || '';
+  const preparationTime = params.get('preparationTime') || '';
 
   useEffect(() => {
     const fetchReceipts = async () => {
@@ -36,14 +36,12 @@ const RecipeList = () => {
     };
 
     fetchReceipts();
-  }, [search]);
+  }, [search, cuisine, preparationTime, query]);
 
   return (
     <ul className="flex flex-wrap justify-center gap-7 m-3">
       {searchResult.length > 0 &&
-        searchResult.map((item) => (
-          <RecipeListItem key={item.id} recipeData={item} />
-        ))}
+        searchResult.map((item) => <RecipeListItem key={item.id} recipeData={item} />)}
     </ul>
   );
 };

@@ -1,7 +1,7 @@
-import React from "react";
-import Image from "next/image";
-import Link from "next/link";
-import { RecipeItem } from "@/app/types/recipes";
+import React from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { RecipeItem } from '@/app/types/recipes';
 
 interface RecipeListItemProps extends RecipeItem {
   recipeData: RecipeItem;
@@ -13,7 +13,7 @@ const RecipeListItem = ({ recipeData }: RecipeListItemProps) => {
     <li className="bg-white shadow-lg rounded-lg overflow-hidden w-full  sm:w-1/2 md:w-1/3 lg:w-1/4">
       <Link href={`/recipe-details?id=${id}`}>
         <Image
-          src={image || ""}
+          src={image || ''}
           width={320}
           height={320}
           alt="images"

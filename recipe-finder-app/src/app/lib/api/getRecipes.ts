@@ -1,7 +1,7 @@
-import axios from "axios";
-import { RecipeSearchParams } from "@/app/types/recipes";
+import axios from 'axios';
+import { RecipeSearchParams } from '@/app/types/recipes';
 
-axios.defaults.baseURL = "https://api.spoonacular.com/recipes/complexSearch";
+axios.defaults.baseURL = 'https://api.spoonacular.com/recipes/complexSearch';
 
 export const getRecipes = async (searchQuery: RecipeSearchParams) => {
   const key = `recipes:${JSON.stringify(searchQuery)}`;

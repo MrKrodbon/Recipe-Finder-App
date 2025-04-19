@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense } from 'react';
 
-import Loading from "@/components/loading";
+import Loading from '@/components/loading';
 
-const RecipeList = lazy(() => import("@/components/recipe-list"));
+const RecipeList = lazy(() => import('@/components/recipe-list'));
 
 export default function Recipes() {
   return (
